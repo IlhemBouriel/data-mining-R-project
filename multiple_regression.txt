@@ -1,0 +1,7 @@
+data - read.csv(./R_Data/data_reg.csv,stringsAsFactors=FALSE)
+other - data[,-c(6,7,8,9,10)]
+m1 - lm(epargne_nationale~  sterling + japonais + suisse + euro + americain,data = other)
+predict(m1,data.frame(sterling=0.3134,japonais=22.4162,suisse=0.5538,euro=32.8285,americain=4.702412))
+
+
+

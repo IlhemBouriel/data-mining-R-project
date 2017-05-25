@@ -1,0 +1,13 @@
+data <- read.csv("./R_Data/data_new.csv",stringsAsFactors=FALSE)
+dt <- data[,c(6,7)]
+dt$rnb <- as.numeric(as.character(dt$rnb))
+dt$pib <- as.numeric(as.character(dt$pib))
+dt <- subset(dt,rnb!= "NA")
+dt <- subset(dt,pib!= "NA")
+
+//correlation tres forte
+cor(dt)
+plot(pib~rnb,data=dt)
+m1 <- lm(pib~rnb,data=dt)
+
+predict(m1,data.frame("rnb"=3.578237))

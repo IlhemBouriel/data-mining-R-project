@@ -1,0 +1,15 @@
+data <- read.csv("./R_data/world_data.csv")
+mylogit <- glm(TradeBalance ~ ., data = data, family = "binomial")
+
+//Fonction pour convertir le TradingBalance entre 0 et 1
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+data$TradeBalance <- range01(data$TradeBalance)
+mylogit <- glm(TradeBalance ~ ., data = data, family = "binomial")
+
+
+//test data (moyenne de chaque attribut)
+newdata1 <- with(data, data.frame(Year=mean(Year),ExportNoOfExportpartners = mean(ExportNoOfExportpartners), ExportNoOfExportproducts = mean(ExportNoOfExportproducts),ImportNoOfImportpartners=mean(ImportNoOfImportpartners),ImportNoOfImportproducts=mean(ImportNoOfImportproducts),TariffAgreement=mean(TariffAgreement)))
+
+//pour predire
+predict(mylogit, newdata = newdata1, type = "response")
+
